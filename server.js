@@ -5,12 +5,10 @@ http.createServer(function(req, res){
     res.writeHead(200, {'Content-Type': 'application/json'});
     
     var timestamp = {
-        unix: "John",
-        natural: "Snow"
+        unix: req.url,
+        natural: req.url
     };
 
     res.end(JSON.stringify(timestamp));
-
-    console.log(req.url);
-
-}).listen(1337, '127.0.0.1');
+    
+}).listen(8080);
