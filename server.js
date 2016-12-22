@@ -14,8 +14,8 @@ http.createServer(function(req, res){
     }
 
     var timestamp = {
-        unix: req.url,
-        natural: req.url
+        unix: timeUnix,
+        natural: timeNatural
     };
 
     res.end(JSON.stringify(timestamp));
