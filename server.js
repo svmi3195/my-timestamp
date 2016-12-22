@@ -4,11 +4,20 @@ var fs = require('fs');
 http.createServer(function(req, res){
     res.writeHead(200, {'Content-Type': 'application/json'});
     
+    var time = req.url.slice(1);
+    var timeUnix = "";
+    var timeNatural = "";
+
+    if(/^[0-9]+$/.test(time)){
+        timeUnix = time;
+        timeNatural = new Date(timeUnix * 1000);
+    }
+
     var timestamp = {
         unix: req.url,
         natural: req.url
     };
 
     res.end(JSON.stringify(timestamp));
-    
+
 }).listen(8080);
