@@ -11,6 +11,9 @@ http.createServer(function(req, res){
     if(/^[0-9]+$/.test(time)){
         timeUnix = time;
         timeNatural = new Date(timeUnix * 1000);
+    }else{
+        timeNatural = new Date(time);
+        timeUnix = getTime(timeNatural);
     }
 
     var timestamp = {
