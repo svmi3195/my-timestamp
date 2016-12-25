@@ -8,12 +8,21 @@ http.createServer(function(req, res){
     var timeUnix = "";
     var timeNatural = "";
 
+    time = time.replace(/%20/g, ' ');
+
+    var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+
     if(/^[0-9]+$/.test(time)){
         timeUnix = time;
-        timeNatural = new Date(timeUnix * 1000);
+        var myDate1 = new Date(timeUnix * 1000);
+        timeNatural = months[myDate1.getMonth()] + ' ' + myDate1.getDate() + ', ' +  myDate1.getFullYear();
+    }else if (Date.parse(time)){
+        var myDate2 = new Date(time);
+        timeUnix = Date.parse(time)/1000;
+        timeNatural = months[myDate2.getMonth()] + ' ' + myDate2.getDate() + ', ' +  myDate2.getFullYear();        
     }else{
-        timeNatural = new Date(time);
-        timeUnix = getTime(timeNatural);
+        timeUnix = null;
+        timeNatural = null;
     }
 
     var timestamp = {
@@ -23,4 +32,4 @@ http.createServer(function(req, res){
 
     res.end(JSON.stringify(timestamp));
 
-}).listen(8080);
+}).listen(1337, '127.0.0.1');
